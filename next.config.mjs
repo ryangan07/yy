@@ -39,6 +39,9 @@ const nextConfig = {
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
     ],
   },
+  experimental: {
+    serverComponentsExternalPackages: ["@grpc/grpc-js", "@grpc/proto-loader"],
+  },
 };
 
 export default nextConfig;
