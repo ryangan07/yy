@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileCta from "@/components/layout/MobileCta";
 import SectionNav from "@/components/layout/SectionNav";
+import WhatsAppFab from "@/components/layout/WhatsAppFab";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -39,6 +40,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <MobileCta />
+        <WhatsAppFab />
       </body>
     </html>
   );
