@@ -7,7 +7,7 @@ const pillars = [
     description: "Your goals set the pace of every conversation, not a sales quota.",
   },
   {
-    index: "2",
+    index: "C",
     title: "Community-Driven",
     description: "Local knowledge of KL, Putrajaya, Cyberjaya, Seri Kembangan and Puchong, put to work for you.",
   },
@@ -17,7 +17,7 @@ const pillars = [
     description: "The work doesn't stop at signing — most clients come back, or send someone who does.",
   },
   {
-    index: "2",
+    index: "R",
     title: "Results-Oriented",
     description: "Clear outcomes, tracked from first enquiry to closed deal.",
   },
@@ -29,7 +29,9 @@ export default function C2R2() {
       <div className="mx-auto max-w-content px-6">
         <Reveal className="mx-auto max-w-measure text-center">
           <p className="text-xs uppercase tracking-[0.16em] text-muted">My framework</p>
-          <h2 className="mt-3 text-h2 text-ink">C2R2</h2>
+          <h2 className="mt-3 text-h2 text-ink">
+            C<sup className="text-[0.55em]">2</sup>R<sup className="text-[0.55em]">2</sup>
+          </h2>
           <p className="mt-4 text-body">
             Four commitments that shape how I work with every client, every time.
           </p>
