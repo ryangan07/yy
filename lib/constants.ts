@@ -13,7 +13,11 @@ export const business = {
   agencyHQ: "Blk A-2-3, Kuchai Exchange, No.43, Jalan Kuchai Maju 13, 58200 Kuala Lumpur",
   agencySite: "https://theroofrealty.com",
   agencyFb: "https://facebook.com/Theroofrealty",
-  areaServed: "Seri Kembangan",
+  areasServed: ["Kuala Lumpur", "Putrajaya", "Cyberjaya", "Seri Kembangan", "Puchong"],
+  get areasServedText() {
+    const areas = this.areasServed;
+    return `${areas.slice(0, -1).join(", ")} and ${areas[areas.length - 1]}`;
+  },
   yearsExperience: 3,
   caseCount: "100+",
 };

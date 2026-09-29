@@ -1,7 +1,7 @@
 export const faqs = [
   {
     q: "What areas do you cover?",
-    a: "I'm based out of Puchong and actively serve Seri Kembangan and the surrounding Klang Valley area.",
+    a: "I'm based out of Puchong and actively serve Kuala Lumpur, Putrajaya, Cyberjaya, Seri Kembangan and Puchong.",
   },
   {
     q: "What services do you offer?",

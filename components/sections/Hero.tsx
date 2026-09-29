@@ -40,8 +40,8 @@ export default function Hero() {
           <p className="mt-6 max-w-measure text-lg leading-relaxed text-bg/80">
             Client-Focused. Community-Driven. Relationship-Based. Results-Oriented.
             <br />
-            Residential, commercial and investment guidance in {business.areaServed} and the
-            Klang Valley — from a negotiator who answers quickly and follows through.
+            Residential, commercial and investment guidance across {business.areasServedText} —
+            from a negotiator who answers quickly and follows through.
           </p>
           <div className="pointer-events-auto mt-8 flex flex-wrap justify-center gap-4">
             <a

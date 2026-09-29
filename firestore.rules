@@ -1,0 +1,34 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in ['ganhongkit@gmail.com'];
+    }
+
+    match /enquiries/{id} {
+      allow create: if request.resource.data.keys().hasAll(['name', 'phone', 'createdAt'])
+                 && request.resource.data.name is string  && request.resource.data.name.size()  <= 100
+                 && request.resource.data.phone is string && request.resource.data.phone.size() <= 30
+                 && request.resource.data.message is string && request.resource.data.message.size() <= 1000;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /posts/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /listings/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

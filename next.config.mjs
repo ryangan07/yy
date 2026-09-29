@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-// TODO(Phase 3): replace <project> with the real Firebase project id once
-// the Firebase project exists, e.g. carimyproperty-xxxxx.firebaseapp.com
-const FIREBASE_AUTH_DOMAIN = "https://<project>.firebaseapp.com";
+const FIREBASE_AUTH_DOMAIN = "https://yy-property.firebaseapp.com";
 
 const csp = [
   "default-src 'self'",

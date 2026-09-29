@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 const propertyTypes = ["Residential", "Commercial", "Investment"];
 const budgetRanges = [
@@ -16,10 +18,10 @@ export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const mountedAt = useRef(Date.now());
 
-  // TODO(Phase 3): wire to a Firestore-backed Server Action.
-  // Honeypot + minimum-submit-time are already in place below; a caught
-  // bot submission should still resolve to the success state so it learns
-  // nothing (per CLAUDE.md §6).
+  const [error, setError] = useState<string | null>(null);
+
+  // A caught bot submission still resolves to the success state so it
+  // learns nothing (per CLAUDE.md §6).
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
@@ -30,14 +32,28 @@ export default function ContactForm() {
     const isBot = Boolean(honeypot) || elapsedMs < 1500;
 
     setStatus("submitting");
+    setError(null);
 
     if (isBot) {
       setTimeout(() => setStatus("success"), 400);
       return;
     }
 
-    // Real submission lands here in Phase 3.
-    setTimeout(() => setStatus("success"), 400);
+    try {
+      await addDoc(collection(db, "enquiries"), {
+        name: String(data.get("name") || ""),
+        phone: String(data.get("phone") || ""),
+        propertyType: String(data.get("propertyType") || ""),
+        budget: String(data.get("budget") || ""),
+        message: String(data.get("message") || ""),
+        createdAt: serverTimestamp(),
+        status: "new",
+      });
+      setStatus("success");
+    } catch {
+      setStatus("idle");
+      setError("Something went wrong — please try WhatsApp or call instead.");
+    }
   }
 
   if (status === "success") {
@@ -122,6 +138,8 @@ export default function ContactForm() {
           className="rounded border border-line bg-bg px-3 py-2 text-sm text-ink normal-case tracking-normal"
         />
       </label>
+
+      {error && <p className="text-sm text-red-600">{error}</p>}
 
       <button
         type="submit"

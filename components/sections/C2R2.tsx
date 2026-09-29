@@ -9,7 +9,7 @@ const pillars = [
   {
     index: "2",
     title: "Community-Driven",
-    description: "Local knowledge of Seri Kembangan and the Klang Valley, put to work for you.",
+    description: "Local knowledge of KL, Putrajaya, Cyberjaya, Seri Kembangan and Puchong, put to work for you.",
   },
   {
     index: "R",

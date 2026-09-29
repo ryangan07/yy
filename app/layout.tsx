@@ -24,7 +24,7 @@ const jost = Jost({
 export const metadata: Metadata = {
   title: "Winnie Wong — Real Estate Negotiator",
   description:
-    "Property negotiator in Seri Kembangan. Residential, commercial and investment consultation. REN 80684, The Roof Realty Sdn Bhd.",
+    "Property negotiator serving Kuala Lumpur, Putrajaya, Cyberjaya, Seri Kembangan and Puchong. Residential, commercial and investment consultation. REN 80684, The Roof Realty Sdn Bhd.",
 };
 
 export default function RootLayout({

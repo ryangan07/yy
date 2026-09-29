@@ -27,7 +27,7 @@ export default function About() {
           <p>
             I&apos;m {business.name}, a Real Estate Negotiator ({business.ren}) with{" "}
             {business.agency} ({business.agencyZh}), serving buyers, agents, investors and
-            businesses across {business.areaServed} and the Klang Valley.
+            businesses across {business.areasServedText}.
           </p>
           <p>
             Over {business.yearsExperience} years in the field, I&apos;ve closed {business.caseCount}{" "}
@@ -40,6 +40,20 @@ export default function About() {
             Relationship-Based, Results-Oriented. It&apos;s less a slogan than a checklist I hold
             myself to on every deal.
           </p>
+        </div>
+
+        <div className="mt-6">
+          <p className="text-xs uppercase tracking-[0.16em] text-muted">Areas I Serve</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {business.areasServed.map((area) => (
+              <span
+                key={area}
+                className="rounded-full border border-camel/60 px-4 py-1.5 text-sm text-ink"
+              >
+                {area}
+              </span>
+            ))}
+          </div>
         </div>
       </Reveal>
     </section>
