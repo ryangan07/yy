@@ -1,12 +1,13 @@
-import { MessageCircle, Phone, Mail } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 import { business, waMessages, whatsappLink } from "@/lib/constants";
 import Reveal from "@/components/ui/Reveal";
+import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import ContactForm from "./ContactForm";
 import LoanCalculator from "./LoanCalculator";
 
 const contactRow = [
   {
-    icon: MessageCircle,
+    icon: WhatsAppIcon,
     label: "WhatsApp",
     value: "016-268 8885",
     href: whatsappLink(waMessages.contact),
@@ -46,7 +47,7 @@ export default function Contact() {
               rel={item.label === "WhatsApp" ? "noopener noreferrer" : undefined}
               className="flex items-center gap-2 text-sm text-body hover:text-ink"
             >
-              <item.icon strokeWidth={1.5} size={18} className="text-camel" />
+              <item.icon strokeWidth={1.5} size={18} className="h-[18px] w-[18px] text-camel" />
               {item.value}
             </a>
           ))}

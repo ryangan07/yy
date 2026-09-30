@@ -9,13 +9,13 @@ export default function About() {
       className="mx-auto flex min-h-screen max-w-content flex-col items-center justify-center gap-12 px-6 py-section-mobile md:flex-row md:py-section"
     >
       <Reveal className="w-full max-w-xs shrink-0 md:max-w-sm">
-        <div className="relative aspect-square overflow-hidden rounded bg-surface">
+        <div className="relative aspect-[3/4] overflow-hidden rounded bg-surface">
           <Image
             src="/images/winnie-portrait.webp"
             alt={business.name}
             fill
             sizes="(min-width: 768px) 384px, 320px"
-            className="object-cover object-top"
+            className="object-cover"
           />
         </div>
       </Reveal>

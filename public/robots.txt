@@ -1,4 +1,5 @@
 User-agent: *
 Disallow: /admin
+Disallow: /demo
 
 Sitemap: https://carimyproperty.com/sitemap.xml

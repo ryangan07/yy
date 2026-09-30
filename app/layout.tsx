@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import MobileCta from "@/components/layout/MobileCta";
-import SectionNav from "@/components/layout/SectionNav";
-import WhatsAppFab from "@/components/layout/WhatsAppFab";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -34,14 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
-      <body className="bg-bg pb-16 text-body font-sans antialiased md:pb-0">
-        <Header />
-        <SectionNav />
-        {children}
-        <Footer />
-        <MobileCta />
-        <WhatsAppFab />
-      </body>
+      <body className="bg-bg text-body font-sans antialiased">{children}</body>
     </html>
   );
 }

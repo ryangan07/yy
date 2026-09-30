@@ -1,4 +1,5 @@
-import { MessageCircle, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
+import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { business, waMessages, whatsappLink } from "@/lib/constants";
 
 export default function MobileCta() {
@@ -10,7 +11,7 @@ export default function MobileCta() {
         rel="noopener noreferrer"
         className="flex flex-1 items-center justify-center gap-2 py-4 text-sm font-medium text-ink"
       >
-        <MessageCircle strokeWidth={1.5} size={18} />
+        <WhatsAppIcon className="h-[18px] w-[18px] text-[#25D366]" />
         WhatsApp
       </a>
       <a

@@ -6,6 +6,7 @@ const sections = [
   { id: "hero", label: "Home" },
   { id: "about", label: "About" },
   { id: "services", label: "Services" },
+  { id: "listings", label: "Listings" },
   { id: "c2r2", label: "C2R2" },
   { id: "why-choose-me", label: "Why Choose Me" },
   { id: "testimonials", label: "Testimonials" },
@@ -15,8 +16,12 @@ const sections = [
 
 export default function SectionNav() {
   const [active, setActive] = useState("hero");
+  const [present, setPresent] = useState<string[]>([]);
 
   useEffect(() => {
+    // Sections like Listings only render when there is content.
+    setPresent(sections.filter(({ id }) => document.getElementById(id)).map(({ id }) => id));
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -41,7 +46,7 @@ export default function SectionNav() {
       aria-label="Section navigation"
       className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-4 lg:flex"
     >
-      {sections.map((section) => {
+      {sections.filter((s) => present.includes(s.id)).map((section) => {
         const isActive = active === section.id;
         return (
           <a

@@ -1,7 +1,8 @@
-import { ChevronDown, MessageCircle, Phone } from "lucide-react";
+import { ChevronDown, Phone } from "lucide-react";
 import { business, waMessages, whatsappLink } from "@/lib/constants";
 import Reveal from "@/components/ui/Reveal";
 import RippleDistortion from "@/components/effects/RippleDistortion";
+import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 
 export default function Hero() {
   return (
@@ -50,7 +51,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="flex items-center gap-2 rounded bg-bg px-6 py-3 text-sm text-ink shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:opacity-90"
             >
-              <MessageCircle strokeWidth={1.5} size={18} />
+              <WhatsAppIcon className="h-[18px] w-[18px]" />
               WhatsApp Me
             </a>
             <a

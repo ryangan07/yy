@@ -6,12 +6,13 @@ import { Phone } from "lucide-react";
 import { business } from "@/lib/constants";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
-  { href: "#c2r2", label: "C2R2" },
-  { href: "#testimonials", label: "Reviews" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#about", label: "About" },
+  { href: "/#services", label: "Services" },
+  { href: "/listings", label: "Listings" },
+  { href: "/#c2r2", label: "C2R2" },
+  { href: "/#testimonials", label: "Reviews" },
+  { href: "/#faq", label: "FAQ" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Header() {
@@ -31,7 +32,7 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex min-h-[72px] max-w-content items-center justify-between px-6 py-2">
-        <Link href="#hero" className="flex flex-col leading-tight">
+        <Link href="/" className="flex flex-col leading-tight">
           <span className="font-display text-xl font-light text-ink">Winnie Wong</span>
           <span className="mt-0.5 text-[10px] uppercase tracking-[0.16em] text-muted">
             Real Estate Negotiator
@@ -41,7 +42,7 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-7 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
