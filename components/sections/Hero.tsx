@@ -3,8 +3,13 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { business } from "@/lib/constants";
 import Reveal from "@/components/ui/Reveal";
 import RippleDistortion from "@/components/effects/RippleDistortion";
+import { cldUrl } from "@/lib/image";
+import { DEFAULT_HERO, getSiteSettings } from "@/lib/siteSettings";
 
-export default function Hero() {
+export default async function Hero() {
+  const { heroImage } = await getSiteSettings();
+  const src = heroImage ? cldUrl(heroImage.url, 2400) : DEFAULT_HERO;
+
   return (
     <section
       id="hero"
@@ -12,7 +17,7 @@ export default function Hero() {
     >
       <div className="absolute inset-0">
         <RippleDistortion
-          src="/images/accent-2.webp"
+          src={src}
           grayscale
           tint="#FAF8F5"
           tintAmount={0.5}

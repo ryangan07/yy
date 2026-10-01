@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import Link from "next/link";
+import { submitEnquiry } from "@/app/actions/enquiry";
 
 const propertyTypes = ["Residential", "Commercial", "Investment"];
 const budgetRanges = [
@@ -40,15 +40,17 @@ export default function ContactForm() {
     }
 
     try {
-      await addDoc(collection(db, "enquiries"), {
+      // The server saves the enquiry and emails Winnie; it repeats the bot checks itself.
+      const { ok } = await submitEnquiry({
         name: String(data.get("name") || ""),
         phone: String(data.get("phone") || ""),
         propertyType: String(data.get("propertyType") || ""),
         budget: String(data.get("budget") || ""),
         message: String(data.get("message") || ""),
-        createdAt: serverTimestamp(),
-        status: "new",
+        website: String(honeypot || ""),
+        elapsedMs,
       });
+      if (!ok) throw new Error("rejected");
       setStatus("success");
     } catch {
       setStatus("idle");
@@ -148,6 +150,14 @@ export default function ContactForm() {
       >
         {status === "submitting" ? "Sending..." : "Send Enquiry"}
       </button>
+
+      <p className="text-center text-xs normal-case tracking-normal text-muted">
+        By sending this form you agree to the{" "}
+        <Link href="/privacy" className="text-ink underline underline-offset-2">
+          Privacy Notice
+        </Link>
+        .
+      </p>
     </form>
   );
 }

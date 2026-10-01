@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { business } from "@/lib/constants";
 
 export default function Footer() {
@@ -32,9 +33,14 @@ export default function Footer() {
         </div>
       </div>
 
-      <p className="mx-auto mt-10 max-w-content px-6 text-xs text-muted">
-        © {new Date().getFullYear()} {business.name}. All rights reserved.
-      </p>
+      <div className="mx-auto mt-10 flex max-w-content flex-wrap justify-between gap-3 px-6 text-xs text-muted">
+        <p>
+          © {new Date().getFullYear()} {business.name}. All rights reserved.
+        </p>
+        <Link href="/privacy" className="hover:text-ink">
+          Privacy Notice / Notis Privasi
+        </Link>
+      </div>
     </footer>
   );
 }

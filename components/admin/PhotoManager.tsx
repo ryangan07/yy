@@ -2,9 +2,10 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, Star, X, Upload } from "lucide-react";
+import { ArrowLeft, ArrowRight, Crop, Star, X, Upload } from "lucide-react";
 import { uploadImage } from "@/lib/cloudinary";
-import { cldUrl, type Photo } from "@/lib/image";
+import { photoUrl, type Photo } from "@/lib/image";
+import CropModal from "./CropModal";
 
 export default function PhotoManager({
   photos,
@@ -18,6 +19,7 @@ export default function PhotoManager({
   const inputRef = useRef<HTMLInputElement>(null);
   const [pending, setPending] = useState(0);
   const [errors, setErrors] = useState<string[]>([]);
+  const [cropping, setCropping] = useState<number | null>(null);
   const latest = useRef(photos);
   latest.current = photos;
 
@@ -59,6 +61,11 @@ export default function PhotoManager({
   function remove(i: number) {
     onRemove(photos[i]);
     onChange(photos.filter((_, k) => k !== i));
+  }
+
+  function setCrop(i: number, crop: Photo["crop"]) {
+    onChange(photos.map((p, k) => (k === i ? { url: p.url, publicId: p.publicId, ...(crop ? { crop } : {}) } : p)));
+    setCropping(null);
   }
 
   return (
@@ -106,10 +113,11 @@ export default function PhotoManager({
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           {photos.map((p, i) => (
             <div key={p.publicId} className="group relative aspect-[4/3] overflow-hidden rounded border border-line">
-              <Image src={cldUrl(p.url, 400)} alt="" fill unoptimized className="object-cover" />
-              {i === 0 && (
-                <span className="absolute left-2 top-2 rounded bg-ink px-2 py-0.5 text-xs text-white">Cover</span>
-              )}
+              <Image src={photoUrl(p, 400)} alt="" fill unoptimized className="object-cover" />
+              <div className="absolute left-2 top-2 flex gap-1">
+                {i === 0 && <span className="rounded bg-ink px-2 py-0.5 text-xs text-white">Cover</span>}
+                {p.crop && <span className="rounded bg-white px-2 py-0.5 text-xs text-ink">Cropped</span>}
+              </div>
               <div className="absolute inset-x-0 bottom-0 flex justify-between bg-black/50 p-1 opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100">
                 <div className="flex">
                   <IconBtn label="Move left" onClick={() => move(i, -1)} disabled={i === 0}>
@@ -121,6 +129,9 @@ export default function PhotoManager({
                   <IconBtn label="Make cover" onClick={() => makeCover(i)} disabled={i === 0}>
                     <Star size={14} />
                   </IconBtn>
+                  <IconBtn label="Crop" onClick={() => setCropping(i)}>
+                    <Crop size={14} />
+                  </IconBtn>
                 </div>
                 <IconBtn label="Remove photo" onClick={() => remove(i)}>
                   <X size={14} />
@@ -129,6 +140,20 @@ export default function PhotoManager({
             </div>
           ))}
         </div>
+      )}
+
+      {photos.length > 0 && (
+        <p className="mt-3 text-xs text-muted">
+          The WINNIE WONG watermark is added automatically to every photo on the website.
+        </p>
+      )}
+
+      {cropping !== null && photos[cropping] && (
+        <CropModal
+          photo={photos[cropping]}
+          onSave={(crop) => setCrop(cropping, crop)}
+          onClose={() => setCropping(null)}
+        />
       )}
     </div>
   );

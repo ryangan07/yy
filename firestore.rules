@@ -27,8 +27,10 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // settings/site holds the homepage photo, which the public homepage must read.
     match /settings/{id} {
-      allow read, write: if isAdmin();
+      allow read: if id == 'site' || isAdmin();
+      allow write: if isAdmin();
     }
 
     match /{document=**} {

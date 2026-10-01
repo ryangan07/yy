@@ -22,7 +22,7 @@ import Gallery from "@/components/listings/Gallery";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { getPublishedListing } from "@/lib/listingsServer";
 import { formatPrice } from "@/lib/listings";
-import { cldUrl } from "@/lib/image";
+import { photoUrl } from "@/lib/image";
 import { business, whatsappLink } from "@/lib/constants";
 
 export const dynamic = "force-dynamic";
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      images: l.photos[0] ? [cldUrl(l.photos[0].url, 1200)] : ["/images/og-cover.jpg"],
+      images: l.photos[0] ? [photoUrl(l.photos[0], 1200)] : ["/images/og-cover.jpg"],
     },
   };
 }

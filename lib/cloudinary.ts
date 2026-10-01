@@ -1,5 +1,5 @@
 import { auth } from "@/lib/firebase";
-import { deleteImages, signUpload } from "@/app/admin/actions";
+import { deleteImages, signUpload, type UploadKind } from "@/app/admin/actions";
 import type { Photo } from "@/lib/image";
 
 const MAX_BYTES = 15 * 1024 * 1024;
@@ -10,9 +10,9 @@ async function idToken() {
   return user.getIdToken();
 }
 
-export async function uploadImage(file: File): Promise<Photo> {
+export async function uploadImage(file: File, kind: UploadKind = "listings"): Promise<Photo> {
   if (file.size > MAX_BYTES) throw new Error(`${file.name} is larger than 15 MB`);
-  const s = await signUpload(await idToken());
+  const s = await signUpload(await idToken(), kind);
 
   const body = new FormData();
   body.append("file", file);

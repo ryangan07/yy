@@ -9,6 +9,7 @@ import AdminGate from "./AdminGate";
 const nav = [
   { href: "/admin", label: "Enquiries" },
   { href: "/admin/listings", label: "Listings" },
+  { href: "/admin/site", label: "Homepage" },
 ];
 
 export default function AdminShell({ children }: { children: React.ReactNode }) {

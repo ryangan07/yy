@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
       priority: 0.8,
     },
+    { url: `${siteUrl}/privacy`, changeFrequency: "yearly", priority: 0.2 },
     ...listings.map((l) => ({
       url: `${siteUrl}/listings/${l.id}`,
       lastModified: l.updatedAtMs ? new Date(l.updatedAtMs) : undefined,

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Star } from "lucide-react";
 import { collection, getDocsFromServer, orderBy, query } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { cldUrl } from "@/lib/image";
+import { photoUrl } from "@/lib/image";
 import { formatPrice, fromFirestore, type Listing } from "@/lib/listings";
 
 export default function AdminListingsPage() {
@@ -45,7 +45,7 @@ export default function AdminListingsPage() {
             >
               <div className="relative aspect-[4/3] bg-line/40">
                 {l.photos[0] ? (
-                  <Image src={cldUrl(l.photos[0].url, 600)} alt="" fill unoptimized className="object-cover" />
+                  <Image src={photoUrl(l.photos[0], 600, { watermark: false })} alt="" fill unoptimized className="object-cover" />
                 ) : (
                   <div className="flex h-full items-center justify-center text-sm text-muted">No photo</div>
                 )}

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { cldUrl, type Photo } from "@/lib/image";
+import { photoUrl, type Photo } from "@/lib/image";
 
 export default function Gallery({ photos, title }: { photos: Photo[]; title: string }) {
   const [index, setIndex] = useState(0);
@@ -16,10 +16,10 @@ export default function Gallery({ photos, title }: { photos: Photo[]; title: str
   // instead of waiting on a fresh Cloudinary download after every click.
   useEffect(() => {
     if (count < 2) return;
-    const near = [1, -1, 2].map((d) => photos[(index + d + count) % count].url);
-    near.forEach((url) => {
-      new window.Image().src = cldUrl(url, 1600);
-      if (open) new window.Image().src = cldUrl(url, 2400);
+    const near = [1, -1, 2].map((d) => photos[(index + d + count) % count]);
+    near.forEach((p) => {
+      new window.Image().src = photoUrl(p, 1600);
+      if (open) new window.Image().src = photoUrl(p, 2400);
     });
   }, [index, open, count, photos]);
 
@@ -51,7 +51,7 @@ export default function Gallery({ photos, title }: { photos: Photo[]; title: str
       <div className="relative aspect-[16/10] overflow-hidden rounded bg-ink/5">
         <button type="button" onClick={() => setOpen(true)} className="absolute inset-0" aria-label="View full screen">
           <Image
-            src={cldUrl(photos[index].url, 1600)}
+            src={photoUrl(photos[index], 1600)}
             alt={`${title} — photo ${index + 1}`}
             fill
             unoptimized
@@ -82,7 +82,7 @@ export default function Gallery({ photos, title }: { photos: Photo[]; title: str
                 i === index ? "border-camel" : "border-transparent opacity-70 hover:opacity-100"
               }`}
             >
-              <Image src={cldUrl(p.url, 240)} alt="" fill unoptimized className="object-cover" />
+              <Image src={photoUrl(p, 240, { watermark: false })} alt="" fill unoptimized className="object-cover" />
             </button>
           ))}
         </div>
@@ -101,7 +101,7 @@ export default function Gallery({ photos, title }: { photos: Photo[]; title: str
           <div className="relative h-[85vh] w-[92vw]">
             {/* Already-cached 1600px copy shows instantly while the sharper 2400px one loads on top. */}
             <Image
-              src={cldUrl(photos[index].url, 1600)}
+              src={photoUrl(photos[index], 1600)}
               alt=""
               fill
               unoptimized
@@ -109,7 +109,7 @@ export default function Gallery({ photos, title }: { photos: Photo[]; title: str
             />
             <Image
               key={index}
-              src={cldUrl(photos[index].url, 2400)}
+              src={photoUrl(photos[index], 2400)}
               alt={`${title} — photo ${index + 1}`}
               fill
               unoptimized

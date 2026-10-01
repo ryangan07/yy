@@ -3,8 +3,11 @@
 import { createHash } from "crypto";
 import { requireAdmin } from "@/lib/verifyAdmin";
 
-const FOLDER = "wennie/listings";
+const FOLDERS = { listings: "wennie/listings", site: "wennie/site" } as const;
+export type UploadKind = keyof typeof FOLDERS;
 const ALLOWED_FORMATS = "jpg,jpeg,png,webp,heic";
+// Shared asset every listing photo overlays — never deletable from the admin.
+const PROTECTED = new Set(["wennie/site/watermark"]);
 
 function cloudinaryEnv() {
   const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
@@ -22,11 +25,13 @@ function sign(params: Record<string, string | number>, apiSecret: string) {
   return createHash("sha1").update(toSign + apiSecret).digest("hex");
 }
 
-export async function signUpload(idToken: string) {
+export async function signUpload(idToken: string, kind: UploadKind = "listings") {
   await requireAdmin(idToken);
+  const folder = FOLDERS[kind];
+  if (!folder) throw new Error("Unknown upload folder");
   const { cloudName, apiKey, apiSecret } = cloudinaryEnv();
   const timestamp = Math.round(Date.now() / 1000);
-  const params = { allowed_formats: ALLOWED_FORMATS, folder: FOLDER, timestamp };
+  const params = { allowed_formats: ALLOWED_FORMATS, folder, timestamp };
   return { cloudName, apiKey, ...params, signature: sign(params, apiSecret) };
 }
 
@@ -36,7 +41,7 @@ export async function deleteImages(idToken: string, publicIds: string[]) {
 
   await Promise.all(
     publicIds
-      .filter((id) => id.startsWith(`${FOLDER}/`))
+      .filter((id) => Object.values(FOLDERS).some((f) => id.startsWith(`${f}/`)) && !PROTECTED.has(id))
       .map(async (public_id) => {
         const timestamp = Math.round(Date.now() / 1000);
         const body = new FormData();

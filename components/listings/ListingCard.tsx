@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Bath, BedDouble, Maximize2 } from "lucide-react";
-import { cldUrl } from "@/lib/image";
+import { photoUrl } from "@/lib/image";
 import { formatPrice } from "@/lib/listings";
 import type { PublicListing } from "@/lib/listingsServer";
 
@@ -16,7 +16,7 @@ export default function ListingCard({ listing: l }: { listing: PublicListing }) 
       <div className="relative aspect-[4/3] overflow-hidden bg-line/40">
         {cover ? (
           <Image
-            src={cldUrl(cover.url, 800)}
+            src={photoUrl(cover, 800)}
             alt={l.title}
             fill
             unoptimized
