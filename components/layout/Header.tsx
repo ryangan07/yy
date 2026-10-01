@@ -60,7 +60,7 @@ export default function Header() {
             <span className="mt-0.5 text-[10px] uppercase tracking-[0.16em] text-muted">
               Real Estate Negotiator
             </span>
-            <span className="mt-0.5 text-[10px] uppercase tracking-[0.14em] text-camel">
+            <span className="mt-0.5 text-[10px] uppercase tracking-[0.14em] text-muted">
               {business.ren} · {business.agency}
             </span>
           </Link>
@@ -111,7 +111,7 @@ export default function Header() {
               <span className="mt-0.5 text-[10px] uppercase tracking-[0.16em] text-muted">
                 Real Estate Negotiator
               </span>
-              <span className="mt-0.5 text-[10px] uppercase tracking-[0.14em] text-camel">
+              <span className="mt-0.5 text-[10px] uppercase tracking-[0.14em] text-muted">
                 {business.ren} · {business.agency}
               </span>
             </Link>

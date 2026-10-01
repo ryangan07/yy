@@ -2,13 +2,18 @@ import type { Metadata } from "next";
 import ListingsBrowser from "@/components/listings/ListingsBrowser";
 import { getPublishedListings } from "@/lib/listingsServer";
 import { business } from "@/lib/constants";
+import { pageOpenGraph } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
+const title = "Properties for Sale & Rent in Putrajaya & Cyberjaya";
+const description = `Condos, landed homes, shops and factories for sale and rent in ${business.areasServedText}. By Winnie Wong, ${business.ren}.`;
+
 export const metadata: Metadata = {
-  title: "Properties for Sale & Rent",
-  description: `Properties for sale and rent across ${business.areasServedText}, represented by Winnie Wong (${business.ren}).`,
+  title,
+  description,
   alternates: { canonical: "/listings" },
+  openGraph: pageOpenGraph({ path: "/listings", title, description }),
 };
 
 export default async function ListingsPage({ searchParams }: { searchParams: { area?: string } }) {

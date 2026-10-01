@@ -11,35 +11,57 @@ import Contact from "@/components/sections/Contact";
 import CursorGrid from "@/components/effects/CursorGrid";
 import SectionNav from "@/components/layout/SectionNav";
 import { business, siteUrl } from "@/lib/constants";
+import { faqs } from "@/lib/faq";
 
 // Listings come from Firestore — render per request so edits show up immediately.
 export const dynamic = "force-dynamic";
 
-const agentJsonLd = {
+// One @graph: the agent, the website, and the FAQ section (lets search and AI answers quote it).
+const homeJsonLd = {
   "@context": "https://schema.org",
-  "@type": "RealEstateAgent",
-  name: business.name,
-  description: `${business.title} — residential, commercial and investment consultation.`,
-  url: siteUrl,
-  image: `${siteUrl}/images/winnie-portrait.webp`,
-  telephone: "+60162688885",
-  email: business.email,
-  identifier: { "@type": "PropertyValue", name: "REN", value: business.ren.replace("REN ", "") },
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "25-1 Jalan OP 1/6, Pusat Perdagangan One Puchong",
-    postalCode: "47160",
-    addressLocality: "Puchong",
-    addressRegion: "Selangor",
-    addressCountry: "MY",
-  },
-  areaServed: business.areasServed.map((name) => ({ "@type": "City", name })),
-  parentOrganization: {
-    "@type": "RealEstateAgent",
-    name: business.agency,
-    url: business.agencySite,
-    identifier: business.licence,
-  },
+  "@graph": [
+    {
+      "@type": "RealEstateAgent",
+      "@id": `${siteUrl}/#agent`,
+      name: business.name,
+      description: `${business.title} with 20+ years' experience — residential, commercial and industrial property sales, rentals and investment consultation.`,
+      url: siteUrl,
+      image: `${siteUrl}/images/winnie-portrait.webp`,
+      telephone: "+60162688885",
+      email: business.email,
+      identifier: { "@type": "PropertyValue", name: "REN", value: business.ren.replace("REN ", "") },
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "25-1 Jalan OP 1/6, Pusat Perdagangan One Puchong",
+        postalCode: "47160",
+        addressLocality: "Puchong",
+        addressRegion: "Selangor",
+        addressCountry: "MY",
+      },
+      areaServed: [
+        { "@type": "Place", name: "Klang Valley" },
+        ...business.areasServed.map((name) => ({ "@type": "City", name })),
+      ],
+      parentOrganization: {
+        "@type": "RealEstateAgent",
+        name: business.agency,
+        url: business.agencySite,
+        identifier: business.licence,
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "Winnie Wong — Real Estate Negotiator",
+      publisher: { "@id": `${siteUrl}/#agent` },
+      inLanguage: "en-MY",
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    },
+  ],
 };
 
 export default function Home() {
@@ -47,7 +69,7 @@ export default function Home() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(agentJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
       />
       <SectionNav />
       <Hero />

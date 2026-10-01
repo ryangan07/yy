@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { business } from "@/lib/constants";
-import Reveal from "@/components/ui/Reveal";
 import RippleDistortion from "@/components/effects/RippleDistortion";
+import HeroPhoto from "./HeroPhoto";
 import { cldUrl } from "@/lib/image";
 import { DEFAULT_HERO, getSiteSettings } from "@/lib/siteSettings";
 
@@ -29,12 +29,15 @@ export default async function Hero() {
           fade={2}
           quality="medium"
         />
+        <HeroPhoto cloudinaryUrl={heroImage?.url} localSrc={DEFAULT_HERO} rippleSrc={src} />
       </div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/50" />
 
       <div className="pointer-events-none relative mx-auto flex w-full max-w-content flex-col items-center px-6 pt-20 text-center">
-        <Reveal className="flex flex-col items-center">
+        {/* CSS fade-in rather than the JS <Reveal>: hero text is the first thing on screen, and waiting
+            for JavaScript to un-hide it delayed Largest Contentful Paint. */}
+        <div className="flex flex-col items-center motion-safe:animate-hero-in">
           <p className="text-xs uppercase tracking-[0.16em] text-bg [text-shadow:0_1px_4px_rgba(0,0,0,0.6)]">
             {business.ren} · {business.agency}
           </p>
@@ -58,7 +61,7 @@ export default async function Hero() {
               <ArrowRight strokeWidth={1.5} size={18} className="transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
-        </Reveal>
+        </div>
       </div>
 
       <a

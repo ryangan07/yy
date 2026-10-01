@@ -6,6 +6,7 @@ const services = [
   {
     icon: Home,
     image: "/images/accent-1.webp",
+    alt: "Modern landed home in the Klang Valley",
     title: "Residential Sales",
     description:
       "Buying, selling or finding the right home — from first viewing to signed paperwork, handled with clear communication at every step.",
@@ -13,6 +14,7 @@ const services = [
   {
     icon: Building2,
     image: "/images/commercial.webp",
+    alt: "Row of shop offices for sale and rent",
     title: "Commercial",
     description:
       "Retail and office premises for businesses that need a negotiator who understands commercial terms, not just square footage.",
@@ -20,6 +22,7 @@ const services = [
   {
     icon: Warehouse,
     image: "/images/industrial.webp",
+    alt: "Industrial factory and warehouse building",
     title: "Industrial",
     description:
       "Factories, warehouses and industrial land — matched to your operational needs, with attention to access, zoning and lease terms.",
@@ -27,6 +30,7 @@ const services = [
   {
     icon: TrendingUp,
     image: "/images/accent-3.webp",
+    alt: "Contemporary investment property at dusk",
     title: "Investment Consultation",
     description:
       "Guidance on acquisition strategy and market positioning for investors building or growing a property portfolio.",
@@ -52,7 +56,7 @@ export default function Services() {
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={service.image}
-                    alt=""
+                    alt={service.alt}
                     fill
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"

@@ -1,7 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Bath, BedDouble, Maximize2 } from "lucide-react";
-import { photoUrl } from "@/lib/image";
+import { photoLoader, photoUrl } from "@/lib/image";
 import { formatPrice } from "@/lib/listings";
 import type { PublicListing } from "@/lib/listingsServer";
 import ListingTypeBadge from "./ListingTypeBadge";
@@ -17,10 +19,11 @@ export default function ListingCard({ listing: l }: { listing: PublicListing }) 
       <div className="relative aspect-[4/3] overflow-hidden bg-line/40">
         {cover ? (
           <Image
+            loader={photoLoader(cover)}
             src={photoUrl(cover, 800)}
             alt={l.title}
             fill
-            unoptimized
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (

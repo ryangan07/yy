@@ -26,3 +26,21 @@ export function photoUrl(photo: Photo, width = 1600, { watermark = true } = {}) 
   steps.push(`f_auto,q_auto,c_limit,w_${width}`);
   return photo.url.replace("/upload/", `/upload/${steps.join("/")}/`);
 }
+
+// next/image loader: lets the browser pick a width from srcset instead of every phone downloading
+// the 1600px copy. Cloudinary does the resizing, so /_next/image is never involved (CLAUDE.md §7).
+// Must be used from client components (a loader is a function prop).
+export const photoLoader =
+  (photo: Photo, opts?: { watermark?: boolean }) =>
+  ({ width }: { width: number }) =>
+    photoUrl(photo, width, opts);
+
+// The widths next/image puts in srcset for a `sizes` value in vw (its default deviceSizes).
+const DEVICE_WIDTHS = [640, 750, 828, 1080, 1200, 1920, 2048, 3840];
+
+// Same srcset next/image generates, so a preload hits the exact URL the <img> will later choose.
+export function preloadPhoto(photo: Photo, sizes: string) {
+  const img = new window.Image();
+  img.sizes = sizes;
+  img.srcset = DEVICE_WIDTHS.map((w) => `${photoUrl(photo, w)} ${w}w`).join(", ");
+}

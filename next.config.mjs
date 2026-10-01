@@ -33,6 +33,18 @@ const nextConfig = {
       },
     ];
   },
+  // The default Netlify address serves an exact copy of the site; send it (and Google) to the
+  // real domain. Deploy previews use other hostnames (deploy-preview-N--wennie…) and are unaffected.
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "wennie.netlify.app" }],
+        destination: "https://winnieproperties.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "res.cloudinary.com" },

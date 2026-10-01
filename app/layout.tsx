@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
 import { siteUrl } from "@/lib/constants";
+import { pageOpenGraph } from "@/lib/seo";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -17,22 +18,17 @@ const jost = Jost({
   display: "swap",
 });
 
+// Homepage targets "property agent / real estate negotiator + area" (CLAUDE.md §12, Q21).
+const title = "Property Agent in Putrajaya & Cyberjaya | Winnie Wong";
 const description =
-  "Property negotiator serving Kuala Lumpur, Putrajaya, Cyberjaya, Seri Kembangan and Puchong. Residential, commercial, industrial and investment consultation. REN 80684, The Roof Realty Sdn Bhd.";
+  "Real estate negotiator (REN 80684) with 20+ years' experience and 100+ deals closed. Homes, shops and factories for sale and rent across the Klang Valley.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: "Winnie Wong — Real Estate Negotiator", template: "%s | Winnie Wong" },
+  title: { default: title, template: "%s | Winnie Wong" },
   description,
   alternates: { canonical: "/" },
-  openGraph: {
-    type: "website",
-    locale: "en_MY",
-    siteName: "Winnie Wong — Real Estate Negotiator",
-    title: "Winnie Wong — Real Estate Negotiator",
-    description,
-    images: [{ url: "/images/og-cover.jpg", width: 1200, height: 630, alt: "Winnie Wong, Real Estate Negotiator" }],
-  },
+  openGraph: pageOpenGraph({ path: "/", title, description }),
 };
 
 export default function RootLayout({

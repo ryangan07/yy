@@ -78,17 +78,23 @@ export default function Testimonials() {
               <ChevronLeft strokeWidth={1.5} size={18} />
             </button>
 
-            <div className="flex gap-2">
+            <div className="flex">
               {testimonials.map((t, i) => (
+                // 24px tap area around the small dot, so it is easy to hit on a phone.
                 <button
                   key={t.name}
                   type="button"
                   onClick={() => goTo(i)}
                   aria-label={`Go to testimonial ${i + 1}`}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    i === index ? "w-6 bg-camel" : "w-2 bg-line hover:bg-camel/50"
-                  }`}
-                />
+                  aria-current={i === index}
+                  className="group flex h-6 min-w-6 items-center justify-center px-1"
+                >
+                  <span
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      i === index ? "w-6 bg-camel" : "w-2 bg-line group-hover:bg-camel/50"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
 

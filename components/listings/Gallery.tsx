@@ -3,7 +3,11 @@
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { photoUrl, type Photo } from "@/lib/image";
+import { photoLoader, photoUrl, preloadPhoto, type Photo } from "@/lib/image";
+
+// The browser picks a width from these; preloads use the same values so they hit the cache.
+const INLINE_SIZES = "(min-width: 1280px) 820px, (min-width: 1024px) 66vw, 100vw";
+const FULLSCREEN_SIZES = "92vw";
 
 export default function Gallery({ photos, title }: { photos: Photo[]; title: string }) {
   const [index, setIndex] = useState(0);
@@ -18,8 +22,8 @@ export default function Gallery({ photos, title }: { photos: Photo[]; title: str
     if (count < 2) return;
     const near = [1, -1, 2].map((d) => photos[(index + d + count) % count]);
     near.forEach((p) => {
-      new window.Image().src = photoUrl(p, 1600);
-      if (open) new window.Image().src = photoUrl(p, 2400);
+      preloadPhoto(p, INLINE_SIZES);
+      if (open) preloadPhoto(p, FULLSCREEN_SIZES);
     });
   }, [index, open, count, photos]);
 
@@ -51,10 +55,11 @@ export default function Gallery({ photos, title }: { photos: Photo[]; title: str
       <div className="relative aspect-[16/10] overflow-hidden rounded bg-ink/5">
         <button type="button" onClick={() => setOpen(true)} className="absolute inset-0" aria-label="View full screen">
           <Image
+            loader={photoLoader(photos[index])}
             src={photoUrl(photos[index], 1600)}
             alt={`${title} — photo ${index + 1}`}
             fill
-            unoptimized
+            sizes={INLINE_SIZES}
             priority
             className="object-cover"
           />
@@ -99,20 +104,22 @@ export default function Gallery({ photos, title }: { photos: Photo[]; title: str
             <X size={24} strokeWidth={1.5} />
           </button>
           <div className="relative h-[85vh] w-[92vw]">
-            {/* Already-cached 1600px copy shows instantly while the sharper 2400px one loads on top. */}
+            {/* The already-cached inline copy shows instantly while the full-screen size loads on top. */}
             <Image
+              loader={photoLoader(photos[index])}
               src={photoUrl(photos[index], 1600)}
               alt=""
               fill
-              unoptimized
+              sizes={INLINE_SIZES}
               className="object-contain"
             />
             <Image
               key={index}
+              loader={photoLoader(photos[index])}
               src={photoUrl(photos[index], 2400)}
               alt={`${title} — photo ${index + 1}`}
               fill
-              unoptimized
+              sizes={FULLSCREEN_SIZES}
               className="object-contain"
             />
           </div>

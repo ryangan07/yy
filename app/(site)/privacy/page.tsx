@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import { business } from "@/lib/constants";
+import { pageOpenGraph } from "@/lib/seo";
+
+const title = "Privacy Notice / Notis Privasi";
+const description = `How ${business.name} (${business.ren}) collects and uses personal data under the Personal Data Protection Act 2010.`;
 
 export const metadata: Metadata = {
-  title: "Privacy Notice / Notis Privasi",
-  description: `How ${business.name} (${business.ren}) collects and uses personal data under the Personal Data Protection Act 2010.`,
+  title,
+  description,
   alternates: { canonical: "/privacy" },
+  openGraph: pageOpenGraph({ path: "/privacy", title, description }),
 };
 
 const EFFECTIVE = "1 October 2026";

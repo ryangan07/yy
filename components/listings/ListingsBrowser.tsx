@@ -116,6 +116,8 @@ export default function ListingsBrowser({
         </div>
       ) : (
         <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Cards use h3; this keeps the page outline h1 → h2 → h3 for search engines and screen readers. */}
+          <h2 className="sr-only">Available properties</h2>
           {visible.map((l) => (
             <ListingCard key={l.id} listing={l} />
           ))}

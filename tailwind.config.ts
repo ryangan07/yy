@@ -40,6 +40,17 @@ const config: Config = {
       transitionDuration: {
         reveal: "350ms",
       },
+      // Hero entrance: starts at 1% opacity (not 0) so the browser counts the text as painted
+      // straight away for Largest Contentful Paint, while it still looks like a fade-in.
+      keyframes: {
+        "hero-in": {
+          from: { opacity: "0.01", transform: "translateY(16px)" },
+          to: { opacity: "1", transform: "none" },
+        },
+      },
+      animation: {
+        "hero-in": "hero-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both",
+      },
     },
   },
   plugins: [],

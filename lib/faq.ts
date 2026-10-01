@@ -5,7 +5,7 @@ export const faqs = [
   },
   {
     q: "What services do you offer?",
-    a: "Residential sales, commercial property transactions, and investment consultation — helping you find, evaluate, or sell the right property.",
+    a: "Residential sales, commercial and industrial property transactions, and investment consultation — helping you find, evaluate, or sell the right property.",
   },
   {
     q: "How quickly will you respond to my enquiry?",
