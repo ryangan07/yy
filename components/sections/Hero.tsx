@@ -1,8 +1,8 @@
-import { ChevronDown, Phone } from "lucide-react";
-import { business, waMessages, whatsappLink } from "@/lib/constants";
+import Link from "next/link";
+import { ArrowRight, ChevronDown } from "lucide-react";
+import { business } from "@/lib/constants";
 import Reveal from "@/components/ui/Reveal";
 import RippleDistortion from "@/components/effects/RippleDistortion";
-import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 
 export default function Hero() {
   return (
@@ -18,7 +18,7 @@ export default function Hero() {
           tintAmount={0.5}
           highlightColor="#FAF8F5"
           glint={0.15}
-          brushSize={110}
+          brushSize={185}
           spacing={30}
           rings={2}
           fade={2}
@@ -44,23 +44,14 @@ export default function Hero() {
             Residential, commercial and investment guidance across {business.areasServedText} —
             from a negotiator who answers quickly and follows through.
           </p>
-          <div className="pointer-events-auto mt-8 flex flex-wrap justify-center gap-4">
-            <a
-              href={whatsappLink(waMessages.hero)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded bg-bg px-6 py-3 text-sm text-ink shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:opacity-90"
+          <div className="pointer-events-auto mt-8">
+            <Link
+              href="/listings"
+              className="group flex items-center gap-2 rounded bg-bg px-8 py-3.5 text-sm text-ink shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
             >
-              <WhatsAppIcon className="h-[18px] w-[18px]" />
-              WhatsApp Me
-            </a>
-            <a
-              href={business.phoneHref}
-              className="flex items-center gap-2 rounded border border-bg px-6 py-3 text-sm text-bg transition-all duration-300 hover:-translate-y-0.5 hover:bg-bg hover:text-ink hover:shadow-md"
-            >
-              <Phone strokeWidth={1.5} size={18} />
-              Call
-            </a>
+              View Listings
+              <ArrowRight strokeWidth={1.5} size={18} className="transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
         </Reveal>
       </div>

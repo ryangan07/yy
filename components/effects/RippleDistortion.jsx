@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import type { CSSProperties } from 'react';
 import { Renderer, Program, Mesh, Geometry, Triangle, Texture, RenderTarget } from 'ogl';
+import './RippleDistortion.css';
 
 const MAX_WAVES = 100;
-const QUALITY_SCALE: Record<string, number> = { low: 0.4, medium: 0.7, high: 1 };
+const QUALITY_SCALE = { low: 0.4, medium: 0.7, high: 1 };
 const START_SCALE = 1.5;
 const LIFE_CONSTANT = Math.log(500);
 
@@ -132,79 +132,7 @@ void main() {
 }
 `;
 
-type RippleTrigger = 'hover' | 'click' | 'both';
-type RippleQuality = 'low' | 'medium' | 'high';
-
-export interface RippleDistortionProps {
-  src?: string;
-  brushSize?: number;
-  strength?: number;
-  swirl?: number;
-  rings?: number;
-  spread?: number;
-  fade?: number;
-  spacing?: number;
-  dispersion?: number;
-  glint?: number;
-  tint?: string;
-  tintAmount?: number;
-  grayscale?: boolean;
-  highlightColor?: string;
-  trigger?: RippleTrigger;
-  clickStrength?: number;
-  quality?: RippleQuality;
-  enabled?: boolean;
-  className?: string;
-  style?: CSSProperties;
-}
-
-interface WaveConfig {
-  brushSize: number;
-  spread: number;
-  fade: number;
-  spacing: number;
-  clickStrength: number;
-  trigger: RippleTrigger;
-  enabled: boolean;
-}
-
-interface Wave {
-  x: number;
-  y: number;
-  scale: number;
-  target: number;
-  size: number;
-  opacity: number;
-}
-
-interface CompositeUniforms {
-  uTexture: { value: Texture };
-  uDisplacement: { value: Texture };
-  uResolution: { value: [number, number] };
-  uTextureSize: { value: [number, number] };
-  uTexel: { value: [number, number] };
-  uTint: { value: [number, number, number] };
-  uHighlight: { value: [number, number, number] };
-  uStrength: { value: number };
-  uSwirl: { value: number };
-  uDispersion: { value: number };
-  uGlint: { value: number };
-  uTintAmount: { value: number };
-  uGrayscale: { value: number };
-  [key: string]: { value: unknown };
-}
-
-interface WaveUniforms {
-  uRings: { value: number };
-  [key: string]: { value: unknown };
-}
-
-interface RippleUniforms {
-  wave: WaveUniforms;
-  composite: CompositeUniforms;
-}
-
-const hexToRGB = (hex: string): [number, number, number] => {
+const hexToRGB = hex => {
   const clean = hex.replace('#', '');
   const full =
     clean.length === 3
@@ -239,10 +167,10 @@ const RippleDistortion = ({
   enabled = true,
   className = '',
   style
-}: RippleDistortionProps) => {
-  const mountRef = useRef<HTMLDivElement | null>(null);
-  const configRef = useRef<WaveConfig>({} as WaveConfig);
-  const uniformsRef = useRef<RippleUniforms | null>(null);
+}) => {
+  const mountRef = useRef(null);
+  const configRef = useRef({});
+  const uniformsRef = useRef(null);
 
   configRef.current = { brushSize, spread, fade, spacing, clickStrength, trigger, enabled };
 
@@ -291,7 +219,7 @@ const RippleDistortion = ({
     const scales = new Float32Array(MAX_WAVES * 2);
     const opacities = new Float32Array(MAX_WAVES);
 
-    const waves: Wave[] = Array.from({ length: MAX_WAVES }, () => ({
+    const waves = Array.from({ length: MAX_WAVES }, () => ({
       x: 0,
       y: 0,
       scale: START_SCALE,
@@ -309,7 +237,7 @@ const RippleDistortion = ({
       iOpacity: { instanced: 1, size: 1, data: opacities }
     });
 
-    const waveUniforms: WaveUniforms = { uRings: { value: rings } };
+    const waveUniforms = { uRings: { value: rings } };
     const waveProgram = new Program(gl, {
       vertex: waveVertex,
       fragment: waveFragment,
@@ -332,7 +260,7 @@ const RippleDistortion = ({
       wrapT: gl.CLAMP_TO_EDGE
     });
 
-    const compositeUniforms: CompositeUniforms = {
+    const compositeUniforms = {
       uTexture: { value: imageTexture },
       uDisplacement: { value: displacementTarget.texture },
       uResolution: { value: [1, 1] },
@@ -381,7 +309,7 @@ const RippleDistortion = ({
     ro.observe(mount);
     resize();
 
-    const setNewWave = (x: number, y: number, power: number) => {
+    const setNewWave = (x, y, power) => {
       const cfg = configRef.current;
       const wave = waves[current];
       current = (current + 1) % MAX_WAVES;
@@ -393,7 +321,7 @@ const RippleDistortion = ({
       wave.opacity = 1;
     };
 
-    const localPoint = (clientX: number, clientY: number): [number, number] | null => {
+    const localPoint = (clientX, clientY) => {
       const rect = mount.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return null;
       if (clientX < rect.left || clientX > rect.right || clientY < rect.top || clientY > rect.bottom) {
@@ -405,7 +333,7 @@ const RippleDistortion = ({
     let previousX = 0;
     let previousY = 0;
 
-    const onMove = (event: PointerEvent) => {
+    const onMove = event => {
       const cfg = configRef.current;
       if (!cfg.enabled || reduceMotion || cfg.trigger === 'click') return;
       const point = localPoint(event.clientX, event.clientY);
@@ -418,7 +346,7 @@ const RippleDistortion = ({
       }
     };
 
-    const onDown = (event: PointerEvent) => {
+    const onDown = event => {
       const cfg = configRef.current;
       if (!cfg.enabled || reduceMotion || cfg.trigger === 'hover') return;
       const point = localPoint(event.clientX, event.clientY);
@@ -432,7 +360,7 @@ const RippleDistortion = ({
     let raf = 0;
     let previousTime = 0;
 
-    const loop = (now: number) => {
+    const loop = now => {
       raf = requestAnimationFrame(loop);
       const delta = previousTime ? Math.min(0.05, (now - previousTime) / 1000) : 0;
       previousTime = now;
@@ -502,13 +430,7 @@ const RippleDistortion = ({
     u.composite.uTint.value = hexToRGB(tint);
   }, [rings, strength, swirl, dispersion, glint, tintAmount, grayscale, highlightColor, tint]);
 
-  return (
-    <div
-      ref={mountRef}
-      className={`relative w-full h-full overflow-hidden bg-black [&>canvas]:block [&>canvas]:w-full [&>canvas]:h-full ${className}`.trim()}
-      style={style}
-    />
-  );
+  return <div ref={mountRef} className={`ripple-distortion ${className}`.trim()} style={style} />;
 };
 
 export default RippleDistortion;

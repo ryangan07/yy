@@ -27,7 +27,6 @@ export function whatsappLink(message: string) {
 }
 
 export const waMessages = {
-  hero: `Hi Winnie, I found your page and I'd like to enquire about a property.`,
   services: `Hi Winnie, I'd like to know more about your property services.`,
   contact: `Hi Winnie, I'd like to get in touch regarding a property enquiry.`,
   mobileCta: `Hi Winnie, I'd like to speak with you about a property.`,
