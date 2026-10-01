@@ -12,6 +12,17 @@ export default function Gallery({ photos, title }: { photos: Photo[]; title: str
 
   const go = useCallback((dir: 1 | -1) => setIndex((i) => (i + dir + count) % count), [count]);
 
+  // Warm the browser cache with the neighbouring photos so arrows switch instantly
+  // instead of waiting on a fresh Cloudinary download after every click.
+  useEffect(() => {
+    if (count < 2) return;
+    const near = [1, -1, 2].map((d) => photos[(index + d + count) % count].url);
+    near.forEach((url) => {
+      new window.Image().src = cldUrl(url, 1600);
+      if (open) new window.Image().src = cldUrl(url, 2400);
+    });
+  }, [index, open, count, photos]);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -88,7 +99,16 @@ export default function Gallery({ photos, title }: { photos: Photo[]; title: str
             <X size={24} strokeWidth={1.5} />
           </button>
           <div className="relative h-[85vh] w-[92vw]">
+            {/* Already-cached 1600px copy shows instantly while the sharper 2400px one loads on top. */}
             <Image
+              src={cldUrl(photos[index].url, 1600)}
+              alt=""
+              fill
+              unoptimized
+              className="object-contain"
+            />
+            <Image
+              key={index}
               src={cldUrl(photos[index].url, 2400)}
               alt={`${title} — photo ${index + 1}`}
               fill

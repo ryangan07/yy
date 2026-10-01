@@ -9,13 +9,45 @@ import Faq from "@/components/sections/Faq";
 import Contact from "@/components/sections/Contact";
 import CursorGrid from "@/components/effects/CursorGrid";
 import SectionNav from "@/components/layout/SectionNav";
+import { business, siteUrl } from "@/lib/constants";
 
 // Listings come from Firestore — render per request so edits show up immediately.
 export const dynamic = "force-dynamic";
 
+const agentJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  name: business.name,
+  description: `${business.title} — residential, commercial and investment consultation.`,
+  url: siteUrl,
+  image: `${siteUrl}/images/winnie-portrait.webp`,
+  telephone: "+60162688885",
+  email: business.email,
+  identifier: { "@type": "PropertyValue", name: "REN", value: business.ren.replace("REN ", "") },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "25-1 Jalan OP 1/6, Pusat Perdagangan One Puchong",
+    postalCode: "47160",
+    addressLocality: "Puchong",
+    addressRegion: "Selangor",
+    addressCountry: "MY",
+  },
+  areaServed: business.areasServed.map((name) => ({ "@type": "City", name })),
+  parentOrganization: {
+    "@type": "RealEstateAgent",
+    name: business.agency,
+    url: business.agencySite,
+    identifier: business.licence,
+  },
+};
+
 export default function Home() {
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(agentJsonLd) }}
+      />
       <SectionNav />
       <Hero />
 

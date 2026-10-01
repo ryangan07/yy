@@ -170,7 +170,7 @@ export default function ListingForm({ id, initial }: { id?: string; initial: Lis
         </label>
         <label className="flex cursor-pointer items-center gap-2 normal-case tracking-normal text-ink">
           <input type="checkbox" checked={l.featured} onChange={(e) => set("featured", e.target.checked)} />
-          Featured
+          Featured (shown on the homepage)
         </label>
       </section>
 

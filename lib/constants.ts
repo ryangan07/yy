@@ -1,3 +1,5 @@
+export const siteUrl = "https://winnieproperties.com";
+
 export const business = {
   name: "Winnie Wong",
   title: "Real Estate Negotiator",

@@ -6,8 +6,9 @@ import { business } from "@/lib/constants";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Listings — Winnie Wong, Real Estate Negotiator",
+  title: "Properties for Sale & Rent",
   description: `Properties for sale and rent across ${business.areasServedText}, represented by Winnie Wong (${business.ren}).`,
+  alternates: { canonical: "/listings" },
 };
 
 export default async function ListingsPage() {

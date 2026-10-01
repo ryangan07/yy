@@ -1,5 +1,4 @@
 User-agent: *
 Disallow: /admin
-Disallow: /demo
 
-Sitemap: https://carimyproperty.com/sitemap.xml
+Sitemap: https://winnieproperties.com/sitemap.xml

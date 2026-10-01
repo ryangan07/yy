@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Star } from "lucide-react";
 import { collection, getDocsFromServer, orderBy, query } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { cldUrl } from "@/lib/image";
@@ -51,6 +52,12 @@ export default function AdminListingsPage() {
                 <div className="absolute left-2 top-2 flex gap-1">
                   <span className="rounded bg-ink px-2 py-0.5 text-xs text-white">{l.listingType}</span>
                   {!l.published && <span className="rounded bg-white px-2 py-0.5 text-xs text-ink">Draft</span>}
+                  {l.featured && (
+                    <span className="flex items-center gap-1 rounded bg-white px-2 py-0.5 text-xs text-ink">
+                      <Star size={12} strokeWidth={1.5} className="fill-camel text-camel" />
+                      Featured
+                    </span>
+                  )}
                   {l.status !== "Available" && (
                     <span className="rounded bg-camel px-2 py-0.5 text-xs text-ink">{l.status}</span>
                   )}

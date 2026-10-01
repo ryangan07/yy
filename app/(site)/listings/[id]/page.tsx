@@ -32,12 +32,17 @@ type Props = { params: { id: string } };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const l = await getPublishedListing(params.id);
   if (!l) return { title: "Listing not found" };
-  const title = `${l.title} — ${formatPrice(l)} | Winnie Wong`;
+  const title = `${l.title} — ${formatPrice(l)}`;
   const description = `${l.listingType}: ${l.propertyType} in ${l.area}. ${l.description.slice(0, 140)}`;
   return {
     title,
     description,
-    openGraph: { title, description, images: l.photos[0] ? [cldUrl(l.photos[0].url, 1200)] : [] },
+    alternates: { canonical: `/listings/${params.id}` },
+    openGraph: {
+      title,
+      description,
+      images: l.photos[0] ? [cldUrl(l.photos[0].url, 1200)] : ["/images/og-cover.jpg"],
+    },
   };
 }
 

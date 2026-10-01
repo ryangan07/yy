@@ -18,16 +18,22 @@ export default function ListingsBrowser({ listings }: { listings: PublicListing[
   const propertyTypes = uniq("propertyType");
   const areas = uniq("area");
 
-  const visible = useMemo(
+  // Tab counts follow the property type / area filters, so each number matches what the tab will show.
+  const matchingOthers = useMemo(
     () =>
       listings.filter(
-        (l) =>
-          (listingType === ALL || l.listingType === listingType) &&
-          (propertyType === ALL || l.propertyType === propertyType) &&
-          (area === ALL || l.area === area)
+        (l) => (propertyType === ALL || l.propertyType === propertyType) && (area === ALL || l.area === area)
       ),
-    [listings, listingType, propertyType, area]
+    [listings, propertyType, area]
   );
+
+  const visible = useMemo(
+    () => matchingOthers.filter((l) => listingType === ALL || l.listingType === listingType),
+    [matchingOthers, listingType]
+  );
+
+  const countFor = (t: string) =>
+    t === ALL ? matchingOthers.length : matchingOthers.filter((l) => l.listingType === t).length;
 
   const selectClass =
     "rounded border border-line bg-surface px-3 py-2 text-sm text-ink normal-case tracking-normal";
@@ -41,11 +47,14 @@ export default function ListingsBrowser({ listings }: { listings: PublicListing[
               key={t}
               type="button"
               onClick={() => setListingType(t)}
-              className={`rounded-full border px-4 py-2 text-sm transition-colors ${
+              className={`flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors ${
                 listingType === t ? "border-ink bg-ink text-white" : "border-line text-body hover:border-ink"
               }`}
             >
               {t}
+              <span className={`text-xs tabular-nums ${listingType === t ? "text-white/70" : "text-muted"}`}>
+                {countFor(t)}
+              </span>
             </button>
           ))}
         </div>
