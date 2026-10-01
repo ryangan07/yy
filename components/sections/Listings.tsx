@@ -41,13 +41,11 @@ export default async function Listings() {
           ))}
         </div>
 
-        {all.length <= shown.length && (
-          <div className="mt-10 text-center">
-            <Link href="/listings" className="text-sm text-body underline-offset-4 hover:text-ink hover:underline">
-              Browse all listings
-            </Link>
-          </div>
-        )}
+        <div className="mt-10 text-center">
+          <Link href="/listings" className="text-sm text-body underline-offset-4 hover:text-ink hover:underline">
+            View all {all.length} listings
+          </Link>
+        </div>
       </div>
     </section>
   );

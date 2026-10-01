@@ -18,7 +18,7 @@ export default function Hero() {
           tintAmount={0.5}
           highlightColor="#FAF8F5"
           glint={0.15}
-          brushSize={185}
+          brushSize={150}
           spacing={30}
           rings={2}
           fade={2}
