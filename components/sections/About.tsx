@@ -23,12 +23,12 @@ export default function About() {
 
       <Reveal className="flex-1">
         <p className="text-xs uppercase tracking-[0.16em] text-muted">About</p>
-        <h2 className="mt-3 text-h2 text-ink">A negotiator who follows through</h2>
+        <h2 className="mt-3 text-h2 text-ink">Turning Property Goals into Results</h2>
         <div className="mt-6 max-w-measure space-y-4 text-base leading-relaxed text-body">
           <p>
-            With more than two decades of property experience, {business.name} ({business.ren}) has
-            built her career around helping clients make confident property decisions across the Klang
-            Valley, Putrajaya, Cyberjaya, Seri Kembangan and Puchong.
+            With more than two decades of property experience, Winnie has built her career around helping
+            clients make confident property decisions across the Klang Valley, Putrajaya, Cyberjaya, Seri
+            Kembangan and Puchong.
           </p>
           <p>
             Having successfully closed over 100 property transactions, Winnie has also received Monthly

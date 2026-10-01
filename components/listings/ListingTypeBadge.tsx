@@ -1,8 +1,8 @@
-// Sale = red with white text, Rent = yellow with dark text (white on yellow is unreadable).
-// Custom listing types added in the admin fall back to the dark badge.
+// Sale = red, Rent = black, both with white text.
+// Custom listing types added in the admin fall back to the dark ink badge.
 const STYLES: Record<string, string> = {
   "For Sale": "bg-[#C62828] text-white",
-  "For Rent": "bg-[#FACC15] text-ink",
+  "For Rent": "bg-black text-white",
 };
 
 export default function ListingTypeBadge({ type, size = "md" }: { type: string; size?: "md" | "lg" }) {

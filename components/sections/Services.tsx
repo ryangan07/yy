@@ -12,7 +12,7 @@ const services = [
   },
   {
     icon: Building2,
-    image: "/images/accent-2.webp",
+    image: "/images/commercial.webp",
     title: "Commercial",
     description:
       "Retail and office premises for businesses that need a negotiator who understands commercial terms, not just square footage.",
