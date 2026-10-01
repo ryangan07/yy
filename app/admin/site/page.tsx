@@ -70,12 +70,12 @@ export default function SiteSettingsPage() {
 
       <section className="mt-8">
         <span className="font-sans text-xs uppercase tracking-[0.16em] text-muted">
-          Current photo {hero ? "(custom)" : "(original)"} — preview in the website&apos;s black &amp; white style
+          Current photo {hero ? "(custom)" : "(original)"}
         </span>
         <div className="relative mt-3 aspect-[16/9] overflow-hidden rounded border border-line bg-ink">
           {!loading && (
             <>
-              <Image src={src} alt="" fill unoptimized className="object-cover grayscale" />
+              <Image src={src} alt="" fill unoptimized className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/50" />
               <p className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-display text-3xl font-light text-bg">
                 Property decisions, negotiated with care.
@@ -86,7 +86,7 @@ export default function SiteSettingsPage() {
 
         <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-body">
           <li>Use a landscape (wide) photo, at least 2000 pixels across, so it stays sharp on large screens.</li>
-          <li>The website shows it in black &amp; white with a dark overlay so the headline stays readable.</li>
+          <li>The website shows it in full colour with a light dark overlay so the headline stays readable.</li>
           <li>The centre of the photo sits behind the headline — avoid photos with important details there.</li>
         </ul>
 

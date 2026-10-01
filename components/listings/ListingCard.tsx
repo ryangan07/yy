@@ -4,6 +4,7 @@ import { Bath, BedDouble, Maximize2 } from "lucide-react";
 import { photoUrl } from "@/lib/image";
 import { formatPrice } from "@/lib/listings";
 import type { PublicListing } from "@/lib/listingsServer";
+import ListingTypeBadge from "./ListingTypeBadge";
 
 export default function ListingCard({ listing: l }: { listing: PublicListing }) {
   const cover = l.photos[0];
@@ -25,8 +26,8 @@ export default function ListingCard({ listing: l }: { listing: PublicListing }) 
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-muted">Photos coming soon</div>
         )}
-        <div className="absolute left-3 top-3 flex gap-2">
-          <span className="rounded bg-ink/85 px-2.5 py-1 text-xs text-white backdrop-blur">{l.listingType}</span>
+        <div className="absolute left-3 top-3 flex items-center gap-2">
+          <ListingTypeBadge type={l.listingType} />
           {l.status !== "Available" && (
             <span className="rounded bg-camel px-2.5 py-1 text-xs text-ink">{l.status}</span>
           )}

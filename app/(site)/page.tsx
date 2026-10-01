@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
+import Stats from "@/components/sections/Stats";
 import Services from "@/components/sections/Services";
 import Listings from "@/components/sections/Listings";
 import C2R2 from "@/components/sections/C2R2";
@@ -68,6 +69,7 @@ export default function Home() {
           />
         </div>
         <About />
+        <Stats />
         <Services />
         <Listings />
         <C2R2 />

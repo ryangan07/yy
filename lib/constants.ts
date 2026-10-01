@@ -20,7 +20,7 @@ export const business = {
     const areas = this.areasServed;
     return `${areas.slice(0, -1).join(", ")} and ${areas[areas.length - 1]}`;
   },
-  yearsExperience: 3,
+  yearsExperience: 20,
   caseCount: "100+",
 };
 

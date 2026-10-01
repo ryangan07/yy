@@ -18,7 +18,7 @@ const jost = Jost({
 });
 
 const description =
-  "Property negotiator serving Kuala Lumpur, Putrajaya, Cyberjaya, Seri Kembangan and Puchong. Residential, commercial and investment consultation. REN 80684, The Roof Realty Sdn Bhd.";
+  "Property negotiator serving Kuala Lumpur, Putrajaya, Cyberjaya, Seri Kembangan and Puchong. Residential, commercial, industrial and investment consultation. REN 80684, The Roof Realty Sdn Bhd.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

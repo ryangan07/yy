@@ -8,7 +8,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "connect-src 'self' https://*.googleapis.com https://api.cloudinary.com https://apis.google.com",
-  `frame-src https://accounts.google.com ${FIREBASE_AUTH_DOMAIN} https://apis.google.com`,
+  `frame-src https://accounts.google.com ${FIREBASE_AUTH_DOMAIN} https://apis.google.com https://public.tableau.com`,
   "img-src 'self' data: blob: https://res.cloudinary.com https://lh3.googleusercontent.com https://images.unsplash.com",
   "object-src 'none'",
   "base-uri 'self'",

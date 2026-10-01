@@ -19,6 +19,8 @@ import {
   Sofa,
 } from "lucide-react";
 import Gallery from "@/components/listings/Gallery";
+import NapicData from "@/components/listings/NapicData";
+import ListingTypeBadge from "@/components/listings/ListingTypeBadge";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { getPublishedListing } from "@/lib/listingsServer";
 import { formatPrice } from "@/lib/listings";
@@ -80,8 +82,8 @@ export default async function ListingDetailPage({ params }: Props) {
 
       <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_340px]">
         <div>
-          <div className="flex flex-wrap gap-2">
-            <span className="rounded bg-ink px-2.5 py-1 text-xs text-white">{l.listingType}</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <ListingTypeBadge type={l.listingType} size="lg" />
             {l.status !== "Available" && (
               <span className="rounded bg-camel px-2.5 py-1 text-xs text-ink">{l.status}</span>
             )}
@@ -124,6 +126,8 @@ export default async function ListingDetailPage({ params }: Props) {
               </ul>
             </section>
           )}
+
+          <NapicData area={l.area} />
         </div>
 
         <aside className="lg:sticky lg:top-28 lg:self-start">

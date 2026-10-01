@@ -6,7 +6,7 @@ import { addDoc, collection, deleteDoc, doc, serverTimestamp, updateDoc } from "
 import { db } from "@/lib/firebase";
 import { removeImages } from "@/lib/cloudinary";
 import type { Photo } from "@/lib/image";
-import { toFirestore, type Listing, type OptionField } from "@/lib/listings";
+import { formatPrice, toFirestore, type Listing, type OptionField } from "@/lib/listings";
 import { useListingOptions } from "@/lib/useListingOptions";
 import { CreatableChips, CreatableSelect } from "./CreatableSelect";
 import PhotoManager from "./PhotoManager";
@@ -21,6 +21,10 @@ export default function ListingForm({ id, initial }: { id?: string; initial: Lis
   const [removed, setRemoved] = useState<Photo[]>([]);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Catches shorthand like "1.6" meant as RM 1.6 million (or "3.5" meant as RM 3,500 rent).
+  const priceLooksTooLow =
+    l.price !== "" && Number(l.price) > 0 && Number(l.price) < (l.listingType === "For Rent" ? 100 : 10000);
 
   const set = <K extends keyof Listing>(key: K, value: Listing[K]) => setL((prev) => ({ ...prev, [key]: value }));
   const numberField = (key: "price" | "bathrooms" | "carParks" | "builtUp" | "landArea" | "yearBuilt") => ({
@@ -47,6 +51,7 @@ export default function ListingForm({ id, initial }: { id?: string; initial: Lis
       setError("Please enter a property name.");
       return;
     }
+    if (priceLooksTooLow && !confirm(`The price will show as ${formatPrice(l)}. Is that correct?`)) return;
     setSaving(true);
     setError(null);
     try {
@@ -102,7 +107,15 @@ export default function ListingForm({ id, initial }: { id?: string; initial: Lis
         </label>
         <label className="flex flex-col gap-1">
           <span>{l.listingType === "For Rent" ? "Rent (RM / month)" : "Price (RM)"}</span>
-          <input {...numberField("price")} placeholder="Leave empty for 'Price on request'" />
+          <input {...numberField("price")} placeholder="Full amount, e.g. 1600000" />
+          <span className="normal-case tracking-normal text-sm text-ink">
+            Shows on the website as: <strong>{formatPrice(l)}</strong>
+          </span>
+          {priceLooksTooLow && (
+            <span className="normal-case tracking-normal text-sm text-red-600">
+              This looks too low. Enter the full amount in ringgit — for RM 1.6 million type 1600000.
+            </span>
+          )}
         </label>
       </section>
 

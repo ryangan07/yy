@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { submitEnquiry } from "@/app/actions/enquiry";
 
-const propertyTypes = ["Residential", "Commercial", "Investment"];
+const propertyTypes = ["Residential", "Commercial", "Industrial", "Investment"];
 const budgetRanges = [
   "Under RM 300,000",
   "RM 300,000 – 600,000",

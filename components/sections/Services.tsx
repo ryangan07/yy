@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Home, Building2, TrendingUp } from "lucide-react";
+import { Home, Building2, TrendingUp, Warehouse } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 
 const services = [
@@ -15,7 +15,14 @@ const services = [
     image: "/images/accent-2.webp",
     title: "Commercial",
     description:
-      "Retail, office and industrial premises for businesses that need a negotiator who understands commercial terms, not just square footage.",
+      "Retail and office premises for businesses that need a negotiator who understands commercial terms, not just square footage.",
+  },
+  {
+    icon: Warehouse,
+    image: "/images/industrial.webp",
+    title: "Industrial",
+    description:
+      "Factories, warehouses and industrial land — matched to your operational needs, with attention to access, zoning and lease terms.",
   },
   {
     icon: TrendingUp,
@@ -35,10 +42,10 @@ export default function Services() {
       <div className="mx-auto max-w-content px-6">
         <Reveal className="mx-auto max-w-measure text-center">
           <p className="text-xs uppercase tracking-[0.16em] text-muted">Services</p>
-          <h2 className="mt-3 text-h2 text-ink">Three ways I can help</h2>
+          <h2 className="mt-3 text-h2 text-ink">Four ways I can help</h2>
         </Reveal>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, i) => (
             <Reveal key={service.title} delay={i * 0.12}>
               <div className="group overflow-hidden rounded border border-line transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
@@ -47,7 +54,7 @@ export default function Services() {
                     src={service.image}
                     alt=""
                     fill
-                    sizes="(min-width: 768px) 33vw, 100vw"
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>

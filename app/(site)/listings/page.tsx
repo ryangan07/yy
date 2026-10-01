@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/listings" },
 };
 
-export default async function ListingsPage() {
+export default async function ListingsPage({ searchParams }: { searchParams: { area?: string } }) {
   const listings = await getPublishedListings();
 
   return (
@@ -19,14 +19,18 @@ export default async function ListingsPage() {
       <p className="text-xs uppercase tracking-[0.16em] text-muted">Listings</p>
       <h1 className="mt-3 text-h2 text-ink">Properties for sale &amp; rent</h1>
       <p className="mt-4 max-w-measure text-body">
-        Homes, commercial space and investment properties across {business.areasServedText}.
+        Homes, commercial, industrial and investment properties across {business.areasServedText}.
       </p>
 
       <div className="mt-12">
         {listings.length === 0 ? (
           <p className="text-body">New listings are on the way — WhatsApp me for what&apos;s available now.</p>
         ) : (
-          <ListingsBrowser listings={listings} />
+          <ListingsBrowser
+            key={searchParams.area ?? "all"}
+            listings={listings}
+            initialArea={typeof searchParams.area === "string" ? searchParams.area.slice(0, 60) : undefined}
+          />
         )}
       </div>
     </main>

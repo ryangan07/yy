@@ -2,21 +2,37 @@
 
 import { useMemo, useState } from "react";
 import ListingCard from "./ListingCard";
+import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
+import { whatsappLink } from "@/lib/constants";
 import type { PublicListing } from "@/lib/listingsServer";
 
 const ALL = "All";
 
-export default function ListingsBrowser({ listings }: { listings: PublicListing[] }) {
-  const [listingType, setListingType] = useState(ALL);
-  const [propertyType, setPropertyType] = useState(ALL);
-  const [area, setArea] = useState(ALL);
-
+export default function ListingsBrowser({
+  listings,
+  initialArea,
+}: {
+  listings: PublicListing[];
+  initialArea?: string;
+}) {
   const uniq = (key: "listingType" | "propertyType" | "area") =>
     [ALL, ...Array.from(new Set(listings.map((l) => l[key]).filter(Boolean)))];
 
   const types = uniq("listingType");
   const propertyTypes = uniq("propertyType");
-  const areas = uniq("area");
+  const listingAreas = uniq("area");
+
+  // Arriving from an "Areas I Serve" link: match the area case-insensitively; an area with no
+  // listings yet is still offered so the visitor sees the empty state instead of everything.
+  const requested = initialArea?.trim();
+  const matchedArea = requested
+    ? listingAreas.find((a) => a.toLowerCase() === requested.toLowerCase()) ?? requested
+    : ALL;
+  const areas = listingAreas.includes(matchedArea) ? listingAreas : [...listingAreas, matchedArea];
+
+  const [listingType, setListingType] = useState(ALL);
+  const [propertyType, setPropertyType] = useState(ALL);
+  const [area, setArea] = useState(matchedArea);
 
   // Tab counts follow the property type / area filters, so each number matches what the tab will show.
   const matchingOthers = useMemo(
@@ -80,7 +96,24 @@ export default function ListingsBrowser({ listings }: { listings: PublicListing[
       </div>
 
       {visible.length === 0 ? (
-        <p className="mt-12 text-center text-body">No properties match these filters.</p>
+        <div className="mt-12 text-center">
+          <p className="text-body">
+            {area !== ALL
+              ? `No listings in ${area} at the moment — WhatsApp me and I'll look for options for you.`
+              : "No properties match these filters."}
+          </p>
+          {area !== ALL && (
+            <a
+              href={whatsappLink(`Hi Winnie, I'm looking for a property in ${area}.`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 rounded bg-[#25D366] px-6 py-3 text-sm text-white transition-opacity hover:opacity-90"
+            >
+              <WhatsAppIcon className="h-[18px] w-[18px]" />
+              WhatsApp Winnie
+            </a>
+          )}
+        </div>
       ) : (
         <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((l) => (

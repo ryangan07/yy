@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { business } from "@/lib/constants";
 import Reveal from "@/components/ui/Reveal";
 
@@ -25,20 +26,25 @@ export default function About() {
         <h2 className="mt-3 text-h2 text-ink">A negotiator who follows through</h2>
         <div className="mt-6 max-w-measure space-y-4 text-base leading-relaxed text-body">
           <p>
-            I&apos;m {business.name}, a Real Estate Negotiator ({business.ren}) with{" "}
-            {business.agency} ({business.agencyZh}), serving buyers, agents, investors and
-            businesses across {business.areasServedText}.
+            With more than two decades of property experience, {business.name} ({business.ren}) has
+            built her career around helping clients make confident property decisions across the Klang
+            Valley, Putrajaya, Cyberjaya, Seri Kembangan and Puchong.
           </p>
           <p>
-            Over {business.yearsExperience} years in the field, I&apos;ve closed {business.caseCount}{" "}
-            cases — recognised with monthly Top Sales, Top Cases and Top Rising Star honours —
-            built on a simple habit: reply fast, tell the truth, and stay with a client until the
-            paperwork is done.
+            Having successfully closed over 100 property transactions, Winnie has also received Monthly
+            and Quarterly recognition for Top Sales, Top Cases and Top Rising Star at The Roof Realty Sdn.
+            Bhd. ({business.agencyZh}).
           </p>
           <p>
-            My approach follows a framework I call C2R2 — Client-Focused, Community-Driven,
-            Relationship-Based, Results-Oriented. It&apos;s less a slogan than a checklist I hold
-            myself to on every deal.
+            At the heart of her professional journey are four enduring values: Hard Work, Honesty,
+            Humility and Trustworthiness. For Winnie, every transaction is more than a deal — it is an
+            opportunity to build trust, nurture relationships and create lasting value. Her commitment to
+            these principles has resulted in strong client relationships and continued referrals.
+          </p>
+          <p>
+            Guided by her C²R² philosophy — Client-Focused, Community-Driven, Relationship-Based,
+            Results-Oriented, Winnie remains dedicated to delivering a refined and dependable property
+            experience for every client.
           </p>
         </div>
 
@@ -46,12 +52,13 @@ export default function About() {
           <p className="text-xs uppercase tracking-[0.16em] text-muted">Areas I Serve</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {business.areasServed.map((area) => (
-              <span
+              <Link
                 key={area}
-                className="rounded-full border border-camel/60 px-4 py-1.5 text-sm text-ink"
+                href={`/listings?area=${encodeURIComponent(area)}`}
+                className="rounded-full border border-camel/60 px-4 py-1.5 text-sm text-ink transition-colors duration-200 hover:border-camel hover:bg-camel/10"
               >
                 {area}
-              </span>
+              </Link>
             ))}
           </div>
         </div>
