@@ -13,7 +13,7 @@ export default async function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black supports-[height:100svh]:min-h-[100svh]"
     >
       <div className="absolute inset-0">
         <RippleDistortion
@@ -34,7 +34,8 @@ export default async function Hero() {
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/50" />
 
-      <div className="pointer-events-none relative mx-auto flex w-full max-w-content flex-col items-center px-6 pt-20 text-center">
+      {/* Mobile: bottom padding keeps the button clear of the fixed WhatsApp / Call bar (h-16). */}
+      <div className="pointer-events-none relative mx-auto flex w-full max-w-content flex-col items-center px-6 pb-20 pt-24 text-center md:pb-0 md:pt-20">
         {/* CSS fade-in rather than the JS <Reveal>: hero text is the first thing on screen, and waiting
             for JavaScript to un-hide it delayed Largest Contentful Paint. */}
         <div className="flex flex-col items-center motion-safe:animate-hero-in">
@@ -46,11 +47,8 @@ export default async function Hero() {
             <br />
             negotiated with care.
           </h1>
-          <p className="mt-6 max-w-measure text-lg leading-relaxed text-bg/80">
-            Client-Focused. Community-Driven. Relationship-Based. Results-Oriented.
-            <br />
-            Residential, commercial, industrial and investment guidance across {business.areasServedText} —
-            from a negotiator who answers quickly and follows through.
+          <p className="mt-5 max-w-measure text-base leading-relaxed text-bg/85 md:mt-6 md:text-lg">
+            Rent, sell and invest across {business.areasServedText}.
           </p>
           <div className="pointer-events-auto mt-8">
             <Link
@@ -67,7 +65,7 @@ export default async function Hero() {
       <a
         href="#about"
         aria-label="Scroll to next section"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-bg/70 transition-colors hover:text-camel"
+        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 animate-bounce text-bg/70 transition-colors hover:text-camel md:block"
       >
         <ChevronDown strokeWidth={1.5} size={28} />
       </a>

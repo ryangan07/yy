@@ -8,7 +8,14 @@ export type Testimonial = {
 // Google review screenshots — D:\yy\Client Google Reviews\. Two additional
 // WhatsApp thank-you messages were supplied but are intentionally excluded:
 // they cannot be attributed as verifiable Google reviews.
+// Order is the carousel order — Tim Kan first at the client's request.
 export const testimonials: Testimonial[] = [
+  {
+    name: "Tim Kan",
+    quote:
+      "Winnie is a kind and trustworthy agent who made the whole process smooth and stress-free. She is highly professional and efficient — I only needed two viewings before confidently deciding to sign the contract.",
+    source: "Google Review",
+  },
   {
     name: "Zahra Osman",
     quote:
@@ -31,12 +38,6 @@ export const testimonials: Testimonial[] = [
     name: "Noor Al-Farsi",
     quote:
       "Winnie is the best agent I could have asked for. She is patient, kind, and genuinely cares about her clients. She guided me honestly and professionally, and I'm truly thankful for her support. 10 stars are not enough!",
-    source: "Google Review",
-  },
-  {
-    name: "Tim Kan",
-    quote:
-      "Winnie is a kind and trustworthy agent who made the whole process smooth and stress-free. She is highly professional and efficient — I only needed two viewings before confidently deciding to sign the contract.",
     source: "Google Review",
   },
   {

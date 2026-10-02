@@ -78,9 +78,15 @@ export default function Testimonials() {
               <ChevronLeft strokeWidth={1.5} size={18} />
             </button>
 
-            <div className="flex">
+            {/* Phones: a counter — ten 24px dots plus both arrows are wider than a 390px screen and
+                pushed the whole page sideways. Dots return from sm up. */}
+            <p className="text-sm tabular-nums text-muted sm:hidden" aria-live="polite">
+              {index + 1} / {testimonials.length}
+            </p>
+
+            <div className="hidden sm:flex">
               {testimonials.map((t, i) => (
-                // 24px tap area around the small dot, so it is easy to hit on a phone.
+                // 24px tap area around the small dot.
                 <button
                   key={t.name}
                   type="button"
