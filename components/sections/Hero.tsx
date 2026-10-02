@@ -48,7 +48,8 @@ export default async function Hero() {
             negotiated with care.
           </h1>
           <p className="mt-5 max-w-measure text-base leading-relaxed text-bg/85 md:mt-6 md:text-lg">
-            Rent, sell and invest across {business.areasServedText}.
+            Exclusive Property Advisory for Rent, Sale &amp; Investment across Kuala Lumpur, Puchong, Seri
+            Kembangan, Putrajaya &amp; Cyberjaya
           </p>
           <div className="pointer-events-auto mt-8">
             <Link
