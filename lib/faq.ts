@@ -29,6 +29,6 @@ export const faqs = [
   },
   {
     q: "What's the fastest way to reach you?",
-    a: "WhatsApp is fastest — tap any \"WhatsApp Me\" button on this page, or call directly at 016-268 8885.",
+    a: "WhatsApp is fastest — tap any \"WhatsApp Me\" button on this page, or call directly at +60 16-2688 885.",
   },
 ];

@@ -9,7 +9,7 @@ const contactRow = [
   {
     icon: WhatsAppIcon,
     label: "WhatsApp",
-    value: "016-268 8885",
+    value: business.phoneDisplay,
     href: whatsappLink(waMessages.contact),
   },
   {

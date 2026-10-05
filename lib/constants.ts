@@ -7,7 +7,7 @@ export const business = {
   agency: "The Roof Realty Sdn Bhd",
   agencyZh: "特富房地产代理有限公司",
   licence: "E(1)1605/3",
-  phoneDisplay: "016-268 8885",
+  phoneDisplay: "+60 16-2688 885",
   phoneHref: "tel:+60162688885",
   whatsappBase: "https://wa.me/60162688885",
   email: "winniewong.trr@yahoo.com",

@@ -17,6 +17,19 @@ export default function Footer() {
         <div>
           <p className="text-xs uppercase tracking-[0.16em] text-ink">Office</p>
           <p className="mt-2">{business.office}</p>
+          {/* Both the local and international forms, so a search for either finds this page. */}
+          <p className="mt-3">
+            Tel / WhatsApp:{" "}
+            <a href={business.phoneHref} className="hover:text-ink">
+              016-2688885
+            </a>{" "}
+            · {business.phoneDisplay}
+          </p>
+          <p className="mt-1">
+            <a href={`mailto:${business.email}`} className="hover:text-ink">
+              {business.email}
+            </a>
+          </p>
         </div>
 
         <div>
