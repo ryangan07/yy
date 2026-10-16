@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { business } from "@/lib/constants";
+import { areas } from "@/lib/areas";
 
 export default function Footer() {
   return (
     <footer className="border-t border-line bg-bg py-12">
-      <div className="mx-auto grid max-w-content gap-8 px-6 text-sm text-muted md:grid-cols-3">
+      <div className="mx-auto grid max-w-content gap-8 px-6 text-sm text-muted sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <p className="font-display text-lg font-light text-ink">{business.name}</p>
           <p className="mt-1 text-xs uppercase tracking-[0.16em]">{business.title}</p>
@@ -20,10 +21,10 @@ export default function Footer() {
           {/* Both the local and international forms, so a search for either finds this page. */}
           <p className="mt-3">
             Tel / WhatsApp:{" "}
-            <a href={business.phoneHref} className="hover:text-ink">
+            <a href={business.phoneHref} className="whitespace-nowrap hover:text-ink">
               016-2688885
             </a>{" "}
-            · {business.phoneDisplay}
+            · <span className="whitespace-nowrap">{business.phoneDisplay}</span>
           </p>
           <p className="mt-1">
             <a href={`mailto:${business.email}`} className="hover:text-ink">
@@ -31,6 +32,19 @@ export default function Footer() {
             </a>
           </p>
         </div>
+
+        <nav aria-label="Areas served">
+          <p className="text-xs uppercase tracking-[0.16em] text-ink">Areas</p>
+          <ul className="mt-2 space-y-1">
+            {areas.map((a) => (
+              <li key={a.slug}>
+                <Link href={`/areas/${a.slug}`} className="hover:text-ink">
+                  Property agent in {a.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         <div>
           <p className="text-xs uppercase tracking-[0.16em] text-ink">Agency</p>

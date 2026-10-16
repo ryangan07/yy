@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { siteUrl } from "@/lib/constants";
 
 export const SITE_NAME = "Winnie Wong — Real Estate Negotiator";
-export const DEFAULT_OG_IMAGE = { url: "/images/og-cover.jpg", width: 1200, height: 630, alt: "Winnie Wong, Real Estate Negotiator" };
+export const DEFAULT_OG_IMAGE = { url: "/images/og-cover-2.jpg", width: 1200, height: 630, alt: "Winnie Wong, Real Estate Negotiator" };
 
 // Next.js replaces (not merges) a parent's openGraph object, so every page builds its own —
 // otherwise a page would inherit the homepage's og:url.

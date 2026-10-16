@@ -79,8 +79,9 @@ export default function PrivacyPage() {
         </Section>
 
         <Section title="8. Cookies">
-          This website does not use advertising or tracking cookies. The admin area uses browser storage only
-          to keep me signed in.
+          This website does not use advertising or tracking cookies. To count visits it stores only today&apos;s
+          date in your browser and records anonymous totals (page views per day) — no names, IP addresses or
+          other personal data. The admin area uses browser storage only to keep me signed in.
         </Section>
 
         <Section title="9. Changes">
@@ -143,8 +144,10 @@ export default function PrivacyPage() {
         </Section>
 
         <Section title="8. Kuki">
-          Laman web ini tidak menggunakan kuki pengiklanan atau penjejakan. Bahagian pentadbir hanya menggunakan
-          storan pelayar untuk mengekalkan log masuk saya.
+          Laman web ini tidak menggunakan kuki pengiklanan atau penjejakan. Untuk mengira lawatan, ia hanya
+          menyimpan tarikh hari ini dalam pelayar anda dan merekodkan jumlah tanpa nama (paparan halaman setiap
+          hari) — tiada nama, alamat IP atau data peribadi lain. Bahagian pentadbir hanya menggunakan storan
+          pelayar untuk mengekalkan log masuk saya.
         </Section>
 
         <Section title="9. Perubahan">

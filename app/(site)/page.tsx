@@ -38,8 +38,11 @@ const homeJsonLd = {
         addressRegion: "Selangor",
         addressCountry: "MY",
       },
+      // Profiles that already rank for her name — lets Google tie "Winnie Wong / REN 80684" to this site.
+      sameAs: ["https://www.iproperty.com.my/property-agent/winnie-wong-3112190/"],
       areaServed: [
         { "@type": "Place", name: "Klang Valley" },
+        { "@type": "State", name: "Selangor" },
         ...business.areasServed.map((name) => ({ "@type": "City", name })),
       ],
       parentOrganization: {

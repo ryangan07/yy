@@ -19,9 +19,9 @@ const jost = Jost({
 });
 
 // Homepage targets "property agent / real estate negotiator + area" (CLAUDE.md §12, Q21).
-const title = "Property Agent in Putrajaya & Cyberjaya | Winnie Wong";
+const title = "Property Agent in Klang Valley, Selangor | Winnie Wong, REN 80684";
 const description =
-  "Real estate negotiator (REN 80684) with 20+ years' experience and 100+ deals closed. Homes, shops and factories for sale and rent across the Klang Valley.";
+  "Real estate negotiator (REN 80684), 20+ years' experience, 100+ deals closed. Homes, shops and factories for sale and rent in Klang Valley, Selangor.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

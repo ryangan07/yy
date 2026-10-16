@@ -2,6 +2,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileCta from "@/components/layout/MobileCta";
 import WhatsAppFab from "@/components/layout/WhatsAppFab";
+import VisitTracker from "@/components/layout/VisitTracker";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -11,6 +12,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <Footer />
       <MobileCta />
       <WhatsAppFab />
+      <VisitTracker />
     </div>
   );
 }

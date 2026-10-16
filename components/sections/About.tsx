@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { areaByName } from "@/lib/areas";
 import { business } from "@/lib/constants";
 import Reveal from "@/components/ui/Reveal";
 
@@ -54,7 +55,7 @@ export default function About() {
             {business.areasServed.map((area) => (
               <Link
                 key={area}
-                href={`/listings?area=${encodeURIComponent(area)}`}
+                href={areaByName(area) ? `/areas/${areaByName(area)!.slug}` : `/listings?area=${encodeURIComponent(area)}`}
                 className="rounded-full border border-camel/60 px-4 py-1.5 text-sm text-ink transition-colors duration-200 hover:border-camel hover:bg-camel/10"
               >
                 {area}

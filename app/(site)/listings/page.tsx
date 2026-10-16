@@ -6,7 +6,7 @@ import { pageOpenGraph } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
-const title = "Properties for Sale & Rent in Putrajaya & Cyberjaya";
+const title = "Properties for Sale & Rent in Klang Valley, Selangor";
 const description = `Condos, landed homes, shops and factories for sale and rent in ${business.areasServedText}. By Winnie Wong, ${business.ren}.`;
 
 export const metadata: Metadata = {

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getPublishedListings } from "@/lib/listingsServer";
 import { siteUrl } from "@/lib/constants";
+import { areas } from "@/lib/areas";
 
 // Listings come from Firestore — build the sitemap per request so new ones appear immediately.
 export const dynamic = "force-dynamic";
@@ -17,6 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
       priority: 0.8,
     },
+    ...areas.map((a) => ({ url: `${siteUrl}/areas/${a.slug}`, changeFrequency: "weekly" as const, priority: 0.9 })),
     { url: `${siteUrl}/privacy`, changeFrequency: "yearly", priority: 0.2 },
     ...listings.map((l) => ({
       url: `${siteUrl}/listings/${l.id}`,
