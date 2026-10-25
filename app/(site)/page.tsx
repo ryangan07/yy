@@ -12,6 +12,7 @@ import CursorGrid from "@/components/effects/CursorGrid";
 import SectionNav from "@/components/layout/SectionNav";
 import { business, siteUrl } from "@/lib/constants";
 import { faqs } from "@/lib/faq";
+import { getPublishedTestimonials } from "@/lib/testimonialsServer";
 
 // Listings come from Firestore — render per request so edits show up immediately.
 export const dynamic = "force-dynamic";
@@ -67,7 +68,9 @@ const homeJsonLd = {
   ],
 };
 
-export default function Home() {
+export default async function Home() {
+  const testimonials = await getPublishedTestimonials();
+
   return (
     <main>
       <script
@@ -99,7 +102,7 @@ export default function Home() {
         <Listings />
         <C2R2 />
         <WhyChooseMe />
-        <Testimonials />
+        <Testimonials testimonials={testimonials} />
         <Faq />
         <Contact />
       </div>

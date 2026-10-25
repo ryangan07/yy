@@ -33,6 +33,15 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // Reviews shown on the homepage, edited in Admin → Reviews. Public queries must filter published == true.
+    match /testimonials/{id} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin()
+                   && request.resource.data.name is string && request.resource.data.name.size() <= 80
+                   && request.resource.data.quote is string && request.resource.data.quote.size() <= 800;
+      allow delete: if isAdmin();
+    }
+
     // Anonymous visit counter written by /api/visit (no auth on the server). Only +1 increments of the
     // known fields are accepted, so nobody can rewrite or reset the numbers; only admins can read.
     match /visits/{day} {

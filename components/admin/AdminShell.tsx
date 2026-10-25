@@ -10,6 +10,7 @@ const nav = [
   { href: "/admin", label: "Enquiries" },
   { href: "/admin/listings", label: "Listings" },
   { href: "/admin/site", label: "Homepage" },
+  { href: "/admin/testimonials", label: "Reviews" },
   { href: "/admin/visitors", label: "Visitors" },
 ];
 

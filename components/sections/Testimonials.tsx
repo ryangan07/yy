@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import gsap from "gsap";
-import { testimonials } from "@/lib/testimonials";
+import type { Testimonial } from "@/lib/testimonials";
 import Reveal from "@/components/ui/Reveal";
 
-export default function Testimonials() {
+export default function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
   const [index, setIndex] = useState(0);
   const total = testimonials.length;
   const direction = useRef<1 | -1>(1);
@@ -43,6 +43,7 @@ export default function Testimonials() {
   }, [index]);
 
   const current = testimonials[index];
+  if (!current) return null;
 
   return (
     <section
@@ -88,7 +89,7 @@ export default function Testimonials() {
               {testimonials.map((t, i) => (
                 // 24px tap area around the small dot.
                 <button
-                  key={t.name}
+                  key={i}
                   type="button"
                   onClick={() => goTo(i)}
                   aria-label={`Go to testimonial ${i + 1}`}

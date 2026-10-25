@@ -1,13 +1,14 @@
+export const TESTIMONIAL_SOURCES = ["Google Review", "WhatsApp message", "Facebook review", "Client message"] as const;
+
 export type Testimonial = {
   name: string;
   quote: string;
-  source: "Google Review";
+  source: string; // one of TESTIMONIAL_SOURCES — shown under the name, so label it honestly
 };
 
-// Sourced verbatim (trimmed for length where noted) from client-provided
-// Google review screenshots — D:\yy\Client Google Reviews\. Two additional
-// WhatsApp thank-you messages were supplied but are intentionally excluded:
-// they cannot be attributed as verifiable Google reviews.
+// Built-in defaults. Once Winnie imports them in Admin → Reviews, the website reads reviews from
+// Firestore instead and these are only the fallback. Google reviews are verbatim (trimmed for length)
+// from client screenshots in D:\yy\Client Google Reviews\; WhatsApp messages are labelled as such.
 // Order is the carousel order — Tim Kan first at the client's request.
 export const testimonials: Testimonial[] = [
   {
@@ -63,6 +64,18 @@ export const testimonials: Testimonial[] = [
     quote:
       "Although I didn't end up renting through Winnie, I still wanted to leave this review because she truly deserves the recognition — professional, patient, and kind. It's rare to meet someone who goes above and beyond even when there is no guarantee of closing a deal.",
     source: "Google Review",
+  },
+  {
+    name: "Mabuchi Kazuaki",
+    quote:
+      "To be honest, we moved to Malaysia in August 2024 and have lived in two different places so far. In our experience here, we have never met an agent and landlord who reply as fast as you both do!",
+    source: "WhatsApp message",
+  },
+  {
+    name: "Mabuchi Kazuaki",
+    quote:
+      "I used to think this slow response was just the normal way of doing things in Malaysia. But you and your landlord are completely different. On top of that, you gave us such a wonderful deal. Thank you so much. We are so excited to stay at your unit!",
+    source: "WhatsApp message",
   },
   {
     name: "Bryan Lim",
